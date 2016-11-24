@@ -70,6 +70,20 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controllerAs: 'vm',
       parent : 'documents'
     })
+    .state('newPost', {
+      url: '/newPost',
+      templateUrl: 'app/newPost/newPost.html',
+      controller: 'CommunicationController',
+      controllerAs: 'vm',
+      parent : 'documents'
+    })
+    .state('postInfo', {
+      url: '/postInfo',
+      templateUrl: 'app/postInfo/postInfo.html',
+      controller: 'CommunicationController',
+      controllerAs: 'vm',
+      parent : 'documents'
+    })
     .state('communication', {
       url: '/communication',
       templateUrl: 'app/communication/communication.html',

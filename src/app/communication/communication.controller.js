@@ -1,5 +1,5 @@
 export class CommunicationController{
-  constructor ($http, $scope){
+  constructor ($http, $scope, $cookieStore){
     'ngInject';
      /* ------------------------------------------------------------------------------------------
         * Создаем массив месяцы
@@ -31,7 +31,7 @@ export class CommunicationController{
                 $scope.postError = "";
                 $scope.postTema = ""; 
                 $scope.postText = "";
-                $scope.postId = "";
+                $scope.postId = $cookieStore.get("postId");;
                 $scope.whoSee = "sda";
             /* ------------------------------------------------------------------------------------------
             * get user
@@ -76,8 +76,9 @@ export class CommunicationController{
 
                 $scope.getUser($scope.userId, 1);
             // set text and tema of post
-                $scope.getPostTema = "";
-                $scope.getPostText = "";
+                $scope.getPostTema = $cookieStore.get("getPostTema");
+                $scope.getPostText = $cookieStore.get("getPostText");;
+                $("#postText").html($scope.getPostText);
             // get comment
                 $scope.comments = [];
             /* ------------------------------------------------------------------------------------------
@@ -150,11 +151,13 @@ export class CommunicationController{
                 $scope.getPost = function(postId) {
                     $http.post($scope.url + "/api/post/" + postId)
                         .success(function(result) {
-                            console.log(result);
+                            $cookieStore.put("getPostTema", result.tema);
+                            $cookieStore.put("getPostText", result.text);
+                            $cookieStore.put("postId", result._id);
+                            console.log($cookieStore.get("getPostText"));
                             $scope.getPostTema = result.tema;
                             $scope.getPostText = result.text;
                             $scope.postId = result._id;
-                            $("#postText").html(result.text);
                 
                         })
                         .error(function(result) {

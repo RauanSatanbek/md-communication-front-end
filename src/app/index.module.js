@@ -14,6 +14,8 @@ import { ClientController } from './client/client.controller';
 import { ClientDetailController } from './clientDetail/clientDetail.controller';
 import { SettingsController } from './settings/settings.controller';
 import { CommunicationController } from './communication/communication.controller';
+import { NewPostController } from './newPost/newPost.controller';
+
 
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { FooterDirective } from '../app/components/footer/footer.directive';
@@ -45,6 +47,7 @@ angular.module('ticketMirusDesk', ["textAngular", 'ngAnimate', 'ngCookies', 'ngS
   .controller('ClientDetailController', ClientDetailController)
   .controller('SettingsController', SettingsController)
   .controller('CommunicationController', CommunicationController)
+  .controller('NewPostController', NewPostController)
 
   .directive('acmeNavbar', NavbarDirective)
   .directive('mFooter', FooterDirective)

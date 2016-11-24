@@ -91,70 +91,47 @@ script.
 m-row.m-document.m-flex
   .m-left-body
     .m-row
-      h1.text-header Список постов
-      .btn-group.btn-filter
-        p.btn-select(ng-click="filter('my')", style='background: #f57373;color:#fff;') Мои
-        p.btn-select(ng-click="filter('common')") Общие
-        p.btn-select(ng-click="filter('all')") Все
-      // .btn-group.m-radio-group(ng-model='vm.selector', bs-radio-group='')
-      //   label.btn.btn-default
-      //     input.btn.btn-default(type='radio', value='my', checked='checked')
-      //     |  Мои
-      //   label.btn.btn-default
-      //     input.btn.btn-default(type='radio', value='withMe')
-      //     |  Общие
-      //   label.btn.btn-default
-      //     input.btn.btn-default(type='radio', value='all')
-      //     |  Все
-    .like-invoice-title
-      // .m-point.m-point-greendot
-      // | Количество заявок: {{vm.tickets.length}}
-    .m-table.like-invoice-body-clear-left-top-padding
-      .m-row(layout='row')
-        .m-col(flex=5)
-          input.m-checkbox.m-checkbox-normal(ng-click='$event.stopPropagation();', type="checkbox", ng-model='vm.allChecked', value="")
-        .m-col(flex=5)
-          .m-checkbox-start.m-checkbox-start-normal(
-          ng-class="{'m-checkbox-checked-start':vm.allStar}",
-          ng-click="$event.stopPropagation(); vm.allStar = !vm.allStar;")
-        .m-col(flex)
-          // employers
-          button.m-select(  type='button', ng-model='vm.selectedEmployer', placeholder='', data-html='1', data-toggle='true', bs-options='item.value as item.label for item in vm.employers', bs-select='')
-            span.m-selected-span.m-selected-face
-            span.caret
-
-          // statuses
-          button.m-select(  type='button', ng-model='vm.selectedStatus', placeholder='', data-html='1', data-toggle='true', bs-options='item.value as item.label for item in vm.statuses', bs-select='')
-            span.caret
-          // delete
-          button.m-select(  type='button', placeholder='')
-            span.m-select.m-selected-bucket
-
-      // Все посты
+      h1.text-header  {{getPostTema}}
+      // Пост
       .ng-scope
-        .modal-header.modal-header-lists
-          // h3#gridSystemModalLabel.modal-title Все посты
-          
-        style.
-          .btn-group, #gridSystemModalLabel{display: inline-block;}
-          .modal-header-lists{border-bottom:none;}
-          .modal-body-lists{padding: 0 0px;}
+        .modal-header
+          br
+          br
+          #postText.bg-success.post
+        br
+        br
         .modal-body.modal-body-lists
-          form.form-horizantal.ng-pristine.ng-valid
-            table.table.lists
+          .comment
+            table.comment-table
               tr
-                th Тема
-                th Создана
-                th Ответы
-                th Владелец / Автор
-                th
-              tr(ng-repeat='post in posts')
                 td
-                  a(ui-sref='postInfo').tema(id='{{post._id}}', ng-click='selectTema(post._id)') {{post.tema}}
-                td {{post.date | date:dateFormat1}}
-                td {{post.answer | date:dateFormat1}}
-                td {{post.creatorName}}
+                  .comment-photo
+                    img.img-thumbnail(src='{{userAvatar}}', width='100%', height='100%', alt='')
                 td
-                  i.fa.fa-star-o.star(aria-hidden='true')
-      // end Все посты
-     
+                  // -- Комментарий write --
+                  .comment-info
+                    p.comment-name {{userName}}
+                    .write-comment.addComment
+                      p Комментарий
+                      text-angular(ng-model='htmlVariable', ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote','bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo'],['justifyLeft','justifyCenter','justifyRight','justifyFull','indent','outdent'], ['insertImage', 'insertLink', 'insertVideo', 'wordcount', 'charcount']]")
+                      br
+                      button#sendComment.btn.btn-success(type='button', ng-click='addComment()') Отправить
+                      span.text-danger.text-error {{commentError}}
+                  // end -- Комментарий write --
+          // Комментарий show
+          .comments
+            hr
+            .comment(ng-repeat='comment in comments')
+              table.comment-table
+                tr
+                  td
+                    .comment-photo
+                      img.img-thumbnail(src='https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS7XmgLfLPpB2aO_I4-7ir7KkZfz4hUMXSuAgPdJ44eFGWm31E-', width='100%', height='100%', alt='')
+                  td
+                    .comment-info
+                      p.comment-name {{comment.userName}}
+                      p.comment-date {{comment.date | date:dateFormat2}}
+                      p.comment-text(ng-bind-html='comment.text')
+              hr
+          // end Комментарий show
+      // end Пост
