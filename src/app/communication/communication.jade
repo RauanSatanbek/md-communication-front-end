@@ -24,7 +24,7 @@
     img.disabled(ng-src='../assets/images/help_desk/ticket.svg')
     img.active(ng-src='../assets/images/help_desk/ticket-reverse.svg')
     md-tooltip(md-direction="bottom") Закрытые
-  a(ui-sref='postInfo')
+  a(ui-sref='postInfo', ng-click='')
     .m-menu-documents-item(
     ng-click='vm.document.docType = item.value; vm.getNumberDocument()',
     ng-class='{"m-menu-document-item-active": false}'
@@ -93,7 +93,7 @@ m-row.m-document.m-flex
     .m-row
       h1.text-header Список постов
       .btn-group.btn-filter
-        p.btn-select(ng-click="filter('my')", style='background: #f57373;color:#fff;') Мои
+        p.btn-select(ng-click="filter('my')", style='background: #f57373;color:#fff;') {{url}}
         p.btn-select(ng-click="filter('common')") Общие
         p.btn-select(ng-click="filter('all')") Все
       // .btn-group.m-radio-group(ng-model='vm.selector', bs-radio-group='')
@@ -149,12 +149,14 @@ m-row.m-document.m-flex
                 th Владелец / Автор
                 th
               tr(ng-repeat='post in posts')
-                td
+                td.favourite
                   a(ui-sref='postInfo').tema(id='{{post._id}}', ng-click='selectTema(post._id)') {{post.tema}}
+                }
+                }
                 td {{post.date | date:dateFormat1}}
                 td {{post.answer | date:dateFormat1}}
-                td {{post.creatorName}}
+                td {{post.creator[0].name}}
                 td
-                  i.fa.fa-star-o.star(aria-hidden='true')
+                  i.fa.fa-star-o.star(aria-hidden='true', ng-click="adToFavorite(post._id)")
       // end Все посты
      

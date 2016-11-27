@@ -126,10 +126,10 @@ m-row.m-document.m-flex
                 tr
                   td
                     .comment-photo
-                      img.img-thumbnail(src='https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS7XmgLfLPpB2aO_I4-7ir7KkZfz4hUMXSuAgPdJ44eFGWm31E-', width='100%', height='100%', alt='')
+                      img.img-thumbnail(src='{{comment.creator[0].avatar}}', width='100%', height='100%', alt='')
                   td
                     .comment-info
-                      p.comment-name {{comment.userName}}
+                      p.comment-name {{comment.creator[0].name}}
                       p.comment-date {{comment.date | date:dateFormat2}}
                       p.comment-text(ng-bind-html='comment.text')
               hr
