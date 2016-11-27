@@ -90,12 +90,13 @@ script.
    
 m-row.m-document.m-flex
   .m-left-body
-    .m-row
+    .m-row 
       h1.text-header Список постов
       .btn-group.btn-filter
-        p.btn-select(ng-click="filter('my')", style='background: #f57373;color:#fff;') {{url}}
+        p.btn-select(ng-click="filter('my')", style='background: #f57373;color:#fff;') Мои
         p.btn-select(ng-click="filter('common')") Общие
         p.btn-select(ng-click="filter('all')") Все
+        p.btn-select(ng-click="filter('favorite')") Избранные
       // .btn-group.m-radio-group(ng-model='vm.selector', bs-radio-group='')
       //   label.btn.btn-default
       //     input.btn.btn-default(type='radio', value='my', checked='checked')
@@ -106,7 +107,10 @@ m-row.m-document.m-flex
       //   label.btn.btn-default
       //     input.btn.btn-default(type='radio', value='all')
       //     |  Все
+    
     .like-invoice-title
+      .m-point.m-point-greendot
+      | Количество заявок: {{posts.length}} 
       // .m-point.m-point-greendot
       // | Количество заявок: {{vm.tickets.length}}
     .m-table.like-invoice-body-clear-left-top-padding
@@ -133,7 +137,7 @@ m-row.m-document.m-flex
       // Все посты -
       .ng-scope
         .modal-header.modal-header-lists
-          // h3#gridSystemModalLabel.modal-title Все посты
+          // h3#gridSystemModalLabel.modal-title Все посты  
           
         style.
           .btn-group, #gridSystemModalLabel{display: inline-block;}
@@ -149,14 +153,12 @@ m-row.m-document.m-flex
                 th Владелец / Автор
                 th
               tr(ng-repeat='post in posts')
-                td.favourite
+                td
                   a(ui-sref='postInfo').tema(id='{{post._id}}', ng-click='selectTema(post._id)') {{post.tema}}
-                }
-                }
                 td {{post.date | date:dateFormat1}}
                 td {{post.answer | date:dateFormat1}}
                 td {{post.creator[0].name}}
                 td
-                  i.fa.fa-star-o.star(aria-hidden='true', ng-click="adToFavorite(post._id)")
+                  i(class="{{post.favorite | CheckFavorite}}", aria-hidden='true', ng-click="adToFavorite(post._id)")
       // end Все посты
      

@@ -48,11 +48,7 @@ export class NewPostController{
 	        $scope.allUsers = {};
 	        $http.get($scope.url + "/api/user/select" + $scope.userId)
 	            .success(function(result) {
-	            	console.log(result);
 	                $scope.allUsers = result;
-	                // for(var i = 0; i < result.length; i++) {
-	                //     console.log(result[i]._id);
-	                // }
 	            })
 	            .error(function(result) {
 	                console.log(result);
@@ -66,7 +62,6 @@ export class NewPostController{
 	      * добавляем всем Получателям id поста
 	      */
 	          $scope.addPost = function() {
-	              console.log($(".ta-bind").html());
 	              var userIds = [];
 	              $scope.postText = $(".ta-bind").html();
 	              console.log($scope.postTema, $scope.postText);

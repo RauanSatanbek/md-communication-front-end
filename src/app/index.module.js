@@ -16,7 +16,7 @@ import { SettingsController } from './settings/settings.controller';
 import { CommunicationController } from './communication/communication.controller';
 import { NewPostController } from './newPost/newPost.controller';
 import { PostInfoController } from './postInfo/postInfo.controller';
-
+import { CheckFavorite } from './components/checkFavorite/checkFavorite.filter';
 
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { FooterDirective } from '../app/components/footer/footer.directive';
@@ -57,6 +57,7 @@ angular.module('ticketMirusDesk', ["textAngular", 'ngAnimate', 'ngCookies', 'ngS
   .directive('mTypeClient', TypeClientDirective)
   .directive('dynamicTextArea', DynamicTextArea)
   // .directive('communication', CommunicationDirective)
+  .filter("CheckFavorite", CheckFavorite)
 
   .service('MenuService', MenuService)
   .service('CheckAuthService', CheckAuthService)

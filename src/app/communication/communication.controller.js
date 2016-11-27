@@ -72,17 +72,20 @@ export class CommunicationController{
               var userIdFilter = $scope.userId;
               switch(filter) {
                   case "my":
-                      console.log("my");
                       userIdFilter += ":" + 1;
                       $scope.filterVar = 1;
                       break;
                   case "common":
                       userIdFilter += ":" + 2;
                       $scope.filterVar = 2;
-                      break;
+                      break; 
                   case "all":
                       userIdFilter += ":" + 3;
                       $scope.filterVar = 3;
+                      break;
+                  case "favorite":
+                      userIdFilter += ":" + 4;
+                      $scope.filterVar = 4;
                       break;
               }
               $http.get($scope.url + "/api/posts/" + userIdFilter)
@@ -111,7 +114,20 @@ export class CommunicationController{
           console.log(postId);
           $http.post($scope.url + "/api/posts/addToFavourites", {postId: postId, userId: $scope.userId})
             .success(function(result) {
-              console.log(result);
+              var filterStr = "my";
+              switch($scope.filterVar) {
+                case 1:
+                  filterStr = "my";
+                  break;
+                case 2:
+                  filterStr = "common";
+                  break;
+                case 3:
+                  filterStr = "all";
+                  break;
+
+              }
+              $scope.filter(filterStr);
             })
             .error(function(error) {
               console.log(error);
