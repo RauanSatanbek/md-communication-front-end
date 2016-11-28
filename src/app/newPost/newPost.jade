@@ -109,7 +109,7 @@ m-row.m-document.m-flex
                 #dLabel.autocomplete.autocomplete-div(data-toggle='dropdown')
                   span.autocomplete-text Имя, должность, почта или стрелка вниз для ручного поиска
                   // Выбранные юзеры
-                  .selected-item(ng-repeat='user in selectedUers')
+                  .selected-item(ng-repeat='user in selectedUers track by $index')
                     table.selected-item-table
                       re
                         td
@@ -152,13 +152,13 @@ m-row.m-document.m-flex
                           .filter-shadow
                           span
                             i.fa.fa-university(aria-hidden='true')
-                            |                                                                             Сотрудники
+                            |Сотрудники
                       li.ui-sdf-autocomplete-filter-item
                         .contractor.filter-parent.ui-sdf-autocomplete-filter
                           .filter-shadow
                           span
                             i.fa.fa-suitcase(aria-hidden='true')
-                            |                                                                             Все Клиенты
+                            |Все Клиенты
                       li.ui-sdf-autocomplete-filter-group
                         span.filter-child.employee.ui-sdf-autocomplete-filter-group2 Отделы
                       li.ui-sdf-autocomplete-filter-item(ng-repeat='name in otdel')

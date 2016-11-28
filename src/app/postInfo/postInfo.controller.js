@@ -34,7 +34,7 @@ export class PostInfoController{
                       $scope.userAvatar = $cookieStore.get("userAvatar");
             // set text and tema of post
                 console.log($scope.postId, "---------------------------------");
-                $scope.getPostTema = "";
+                $scope.getPostTheme = "";
                 $scope.getPostText = "";
                 // $("#postText").html($scope.getPostText);
             // get comment
@@ -72,7 +72,7 @@ export class PostInfoController{
                 $scope.getPost = function(postId) {
                     $http.post($scope.url + "/api/post/" + postId)
                         .success(function(result) {
-                            $scope.getPostTema = result.tema;
+                            $scope.getPostTheme = result.theme;
                             $scope.getPostText = result.text;
                             $("#postText").html($scope.getPostText);
                             $scope.postId = result._id;
