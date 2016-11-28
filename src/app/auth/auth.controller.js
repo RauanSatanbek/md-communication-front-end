@@ -37,7 +37,7 @@ export class AuthController {
 
     console.log(envService.read('apiUrl'));
 
-
+    $localStorage.user = [];
     self.auth = ()=>{
 
       // login

@@ -49,15 +49,6 @@
 
 script.
   $(document).ready(function() {
-  $(".autocomplete-div").click(function() {
-  $(".autocomplete-text").css("display", "none");
-  $(".autocomplete-input").css("display", "inline-block");
-  $(".autocomplete-input").focus();
-  });
-  $(".selected-item-close").click(function() {
-  $(this).parent().parent().parent().parent().parent().fadeOut(100);
-  });
-  });   
   $(".star").mouseenter(function() {
   $(this).get(0).className = 'fa fa-star star';
   });
@@ -74,7 +65,7 @@ script.
   $(".btn-select").mouseleave(function() {
   if("rgb(245, 115, 115)" != $(this).css("backgroundColor")) $(this).css({"background":"#f2f2f2", "color": "#333"});
   });
-
+  });
   // $(".m-flex").delegate(".lists tr", "click", function() {
   // $(".lists tr").css("backgroundColor", "#fff");
   // $(this).css("backgroundColor", "#f5e6a3");

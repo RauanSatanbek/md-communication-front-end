@@ -139,8 +139,7 @@ export class CommunicationController{
         * Удаляем чеканные посты
         */
             $scope.deletePosts = function() {
-                console.log("deletePosts");
-                $http.post($scope.url + "/api/posts/delete", {listDelete: listDelete})
+                $http.post($scope.url + "/api/posts/delete", {listDelete: listDelete, userId: $scope.userId})
                     .success(function(result) {
                         console.log(result);
                         $scope.filter($scope.filterVar);
