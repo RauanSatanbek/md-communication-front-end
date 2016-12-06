@@ -34,12 +34,8 @@ export class AuthController {
     //   console.log(response);
     // });
 
-
-    console.log(envService.read('apiUrl'));
-
-    $localStorage.user = [];
     self.auth = ()=>{
-
+    console.log(self.idToEnter,self.password);
       // login
       $http({
         url : envService.read('apiUrl')+"api/login",
@@ -52,7 +48,7 @@ export class AuthController {
         console.log(response);
 
         $localStorage.user = response.data;
-        $state.go('ticket');
+        $state.go('communication');
       }, function errorCallback(response) {
         console.log(response);
         console.log('open toastr');

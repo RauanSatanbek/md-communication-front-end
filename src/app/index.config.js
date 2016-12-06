@@ -17,7 +17,6 @@ export function config ($logProvider, toastrConfig, $mdThemingProvider, tmhDynam
   $mdThemingProvider.theme('default')
     .primaryPalette('blue')
 
-
   // set the domains and variables for each environment
   envServiceProvider.config({
     domains: {
@@ -26,10 +25,13 @@ export function config ($logProvider, toastrConfig, $mdThemingProvider, tmhDynam
     },
     vars: {
       development: {
-        apiUrl: 'http://localhost:8081/'
+        apiUrl: 'http://localhost:8082/'
+      },
+      localhost: {
+        apiUrl: 'http://localhost:8082/'
       },
       production: {
-        apiUrl: 'http://159.203.234.82:8081/'
+        apiUrl: 'http://159.203.234.82:8082/'
       }
     }
   });

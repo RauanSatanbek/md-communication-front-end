@@ -1,5 +1,5 @@
 export class NewPostController{
-	constructor($scope, $http, $cookieStore){
+	constructor($scope, $http, $cookieStore, envService){
 		'ngInject';
 		/* ------------------------------------------------------------------------------------------
 		* Создаем массив месяцы
@@ -26,7 +26,7 @@ export class NewPostController{
 		/* ------------------------------------------------------------------------------------------
 		* создаем основные переменные
 		*/   
-			$scope.url = "http://localhost:8082";
+            var url = envService.read('apiUrl');
 			$scope.posts = "";
 			$scope.postError = "";
 			$scope.postTema = ""; 
@@ -46,7 +46,7 @@ export class NewPostController{
 		* гетим всех юзеров для - Получатели  
 		*/
 			$scope.allUsers = {};
-			$http.get($scope.url + "/api/user/select" + $scope.userId)
+			$http.get(url + "api/user/select" + $scope.userId)
 				.success(function(result) {
 					$scope.allUsers = result;
 				})
@@ -71,7 +71,7 @@ export class NewPostController{
 					for(var i = 0; i < $scope.selectedUers.length; i++) {
 						userIds.push($scope.selectedUers[i]._id);
 					}
-					$http.post($scope.url + "/api/post", {theme: $scope.postTema, text: $scope.postText, userId: $scope.userId, filter: $scope.filterVar, userName: $scope.userName, userIds: userIds})
+					$http.post(url + "api/post", {theme: $scope.postTema, text: $scope.postText, userId: $scope.userId, filter: $scope.filterVar, userName: $scope.userName, userIds: userIds})
 						.success(function(result) {
 							$scope.postTema = "";
 							$scope.postText = "";
@@ -89,7 +89,7 @@ export class NewPostController{
 		*/
 			$scope.selectedUers = [];
 			$scope.addUserToSelected = function(userId) {
-				$http.get($scope.url + "/api/user/" + userId)
+				$http.get(url + "api/user/" + userId)
 					.success(function(result) {
 						console.log(result);
 						var bool = false;

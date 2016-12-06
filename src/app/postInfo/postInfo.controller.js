@@ -1,5 +1,5 @@
 export class PostInfoController{
-  constructor ($http, $scope, $cookieStore){
+  constructor ($http, $scope, $cookieStore, envService){
     'ngInject';
         /* ------------------------------------------------------------------------------------------
         * Создаем массив месяцы
@@ -19,7 +19,7 @@ export class PostInfoController{
             /* ------------------------------------------------------------------------------------------
             * создаем основные переменные
             */   
-                $scope.url = "http://localhost:8082";
+                var url = envService.read('apiUrl');
                 $scope.posts = "";
                 $scope.postError = "";
                 $scope.postTema = ""; 
@@ -33,7 +33,6 @@ export class PostInfoController{
                       $scope.userId = $cookieStore.get("userId");;
                       $scope.userAvatar = $cookieStore.get("userAvatar");
             // set text and tema of post
-                console.log($scope.postId, "---------------------------------");
                 $scope.getPostTheme = "";
                 $scope.getPostText = "";
                 // $("#postText").html($scope.getPostText);
@@ -55,7 +54,7 @@ export class PostInfoController{
                         $scope.commentError = "Error post not found";
                     } else {
                         $scope.commentError = "";
-                        $http.post($scope.url + "/api/comment", {userName: $scope.userName, userId: $scope.userId, postId: $scope.postId, text: commentText})
+                        $http.post(url + "api/comment", {userName: $scope.userName, userId: $scope.userId, postId: $scope.postId, text: commentText})
                             .success(function(result) {
                                 $(".ta-bind").html("");
                                 $scope.comments = result;
@@ -70,7 +69,7 @@ export class PostInfoController{
             * Возвращаем выбранный пост
             */
                 $scope.getPost = function(postId) {
-                    $http.post($scope.url + "/api/post/" + postId)
+                    $http.post(url + "api/post/" + postId)
                         .success(function(result) {
                             $scope.getPostTheme = result.theme;
                             $scope.getPostText = result.text;
@@ -85,7 +84,7 @@ export class PostInfoController{
             * get comment
             * Возвращаем все комменты для выбранного поста
             */
-                    $http.post($scope.url + "/api/comment/" + postId)
+                    $http.post(url + "api/comment/" + postId)
                         .success(function(result) {
                             $scope.comments = result;
                             console.log(result[0].creator[0]);

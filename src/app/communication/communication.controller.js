@@ -1,10 +1,11 @@
 export class CommunicationController{
-    constructor ($http, $scope, $cookieStore){
+    constructor ($http, $scope, $cookieStore, envService, $localStorage){
         'ngInject';
         /* ------------------------------------------------------------------------------------------
         * Создаем массив месяцы
         * берем активный месяц и дату
         */
+            console.log($localStorage.user);
             var months = ['январья', 'февралья', 'марта', 'апрелья', 'майа', 'июнья', 'июлья', 'августа', 'сентябрья', 'октябрья', 'ноябрья', 'декабрья'];
             var date = new Date();
             var month = months[date.getMonth()];
@@ -26,7 +27,8 @@ export class CommunicationController{
         /* ------------------------------------------------------------------------------------------
         * создаем основные переменные
         */   
-            $scope.url = "http://localhost:8082";
+            var url = envService.read('apiUrl');
+            console.log(url);
             $scope.posts = "";
             $scope.postError = "";
             $scope.postTema = ""; 
@@ -41,7 +43,7 @@ export class CommunicationController{
             $scope.userAvatar = "";
             $scope.userInfoForComment = [];
             $scope.getUser = function(userId, type) {
-                $http.get($scope.url + "/api/user/" + userId)
+                $http.get(url + "api/user/" + userId)
                 .success(function(result) {
                     if(parseInt(type) == 1){
                         $cookieStore.put("userName", result.name);
@@ -89,7 +91,7 @@ export class CommunicationController{
                         $scope.filterVar = 4;
                         break;
                 }
-                $http.get($scope.url + "/api/posts/" + userIdFilter)
+                $http.get(url + "api/posts/" + userIdFilter)
                     .success(function(result) {
                         result.reverse();
                         $scope.posts = result;
@@ -112,7 +114,7 @@ export class CommunicationController{
         */
             $scope.adToFavorite = function(postId) {
             console.log(postId);
-            $http.post($scope.url + "/api/posts/addToFavourites", {postId: postId, userId: $scope.userId})
+            $http.post(url + "api/posts/addToFavourites", {postId: postId, userId: $scope.userId})
                 .success(function(result) {
                     $scope.filter($scope.filterVar);
                 })
@@ -139,7 +141,7 @@ export class CommunicationController{
         * Удаляем чеканные посты
         */
             $scope.deletePosts = function() {
-                $http.post($scope.url + "/api/posts/delete", {listDelete: listDelete, userId: $scope.userId})
+                $http.post(url + "api/posts/delete", {listDelete: listDelete, userId: $scope.userId})
                     .success(function(result) {
                         console.log(result);
                         $scope.filter($scope.filterVar);
@@ -148,35 +150,5 @@ export class CommunicationController{
                         console.log(result);
                     });
             }
-//    app.directive("tr", function() {
-//     return {
-//         restrict: 'A',
-//         link: function(scope, element, attrs) {
-//             element.click(function(){
-//                 $(".lists tr").css("backgroundColor", "#fff");
-//                 $(this).css("backgroundColor", "#f5e6a3");
-//             });
-//             element.mouseenter(function() {
-//                 if(("rgb(245, 230, 163)" != $(this).css("backgroundColor")) && ("rgb(248, 238, 192)" != $(this).css("backgroundColor"))) $(this).css("backgroundColor", "#f5f5f5");
-//                 else $(this).css("backgroundColor", "#f5e6a3");
-//             });
-//             element.mouseleave(function() {
-//                 if(("rgb(245, 230, 163)" != $(this).css("backgroundColor")) && ("rgb(248, 238, 192)" != $(this).css("backgroundColor"))) $(this).css("backgroundColor", "#fff");
-//                 else $(this).css("backgroundColor", "#f8eec0");
-//             });
-//         }
-//     }
-// });
-
-
-// app.directive("selectTema", function() {
-//     return {
-//         link: function(scope, element, attrs) {
-//             element.click(function(){
-//                 scope.getPost($(this).get(0).id);
-//             });
-//         }
-//     }
-// });
   }
 }
