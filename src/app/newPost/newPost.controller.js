@@ -41,7 +41,6 @@ export class NewPostController{
 			$scope.userName = USER.name;
 			$scope.userId = USER._id;
 			$scope.userAvatar = "";
-
 		/* ------------------------------------------------------------------------------------------
 		* get all users
 		* гетим всех юзеров для - Получатели  
@@ -92,20 +91,41 @@ export class NewPostController{
 			$scope.addUserToSelected = function(userId) {
 				$http.get(url + "api/user/" + userId)
 					.success(function(result) {
-						console.log(result, "------------------------------------------");
-						var bool = false;
-						for(var i = 0; i < $scope.selectedUers.length; i++){
-							if(result._id == $scope.selectedUers[i]._id) {
-								bool = true;
-								break;
-							} 
-						}
-						if(!bool) $scope.selectedUers.push(result);
-						console.log($scope.selectedUers);
+						addUsersToSelected(result);
 					})
 					.error(function(result) {
 						console.log(result);
 					});
+			}
+			// выбрать всех юзеров
+			$scope.addAllUsersToSelected = function(userId) {
+				for(var i = 0; i < $scope.allUsers.length; i++) {
+					addUsersToSelected($scope.allUsers[i]);
+				}
+			}
+			// выбрать всех клиентов
+			$scope.addAllClientsToSelected = function(userId) {
+				$http.get(url + "api/client")
+					.success(function(result) {
+						for(var i = 0; i < result.length; i++) {
+							addUsersToSelected(result[i]);
+						}
+					})
+					.error(function(result) {
+						console.log(result);
+					});
+			}
+
+			// добавть выбранных юзеров, клинтов в массив
+			function addUsersToSelected(result) {
+				var bool = false;
+				for(var i = 0; i < $scope.selectedUers.length; i++){
+					if(result._id == $scope.selectedUers[i]._id) {
+						bool = true;
+						break;
+					} 
+				}
+				if(!bool) $scope.selectedUers.push(result);
 			}
 		/* ------------------------------------------------------------------------------------------
 		* Удаляем из массива selectedUers выбранные юзеры для Получатели 

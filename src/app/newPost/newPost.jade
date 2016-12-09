@@ -63,7 +63,6 @@ m-row.m-document.m-flex
   .m-left-body
     .m-row
       h1.text-header Новое сообщение
-      
       // Новое сообщение
       .modal-header
         span.text-danger.text-error {{postError}}
@@ -118,17 +117,17 @@ m-row.m-document.m-flex
                         .all.filter-parent.ui-sdf-autocomplete-filter
                           .filter-shadow
                           span Все
-                      li.ui-sdf-autocomplete-filter-item.selected-filter
+                      li.ui-sdf-autocomplete-filter-item.selected-filter(ng-click="addAllUsersToSelected()")
                         .employee.filter-parent.ui-sdf-autocomplete-filter
                           .filter-shadow
                           span
-                            i.fa.fa-university(aria-hidden='true')
+                            i.fa.fa-university(aria-hidden='true', style='margin-right: 10px;')
                             |Сотрудники
-                      li.ui-sdf-autocomplete-filter-item
+                      li.ui-sdf-autocomplete-filter-item(ng-click="addAllClientsToSelected()")
                         .contractor.filter-parent.ui-sdf-autocomplete-filter
                           .filter-shadow
                           span
-                            i.fa.fa-suitcase(aria-hidden='true')
+                            i.fa.fa-suitcase(aria-hidden='true', style='margin-right: 10px;')
                             |Все Клиенты
                       // li.ui-sdf-autocomplete-filter-group
                       //   span.filter-child.employee.ui-sdf-autocomplete-filter-group2 Отделы

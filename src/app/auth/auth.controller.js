@@ -41,9 +41,8 @@ export class AuthController {
         url : envService.read('apiUrl')+"api/login",
         method : "POST",
         data : {
-          idToEnter : self.idToEnter,
-          password : self.password,
-          option: self.option 
+          idToEnter : self.idToEnter + ")" + self.option,
+          password : self.password
         }
       }).then(function successCallback(response) {
         console.log(response);
