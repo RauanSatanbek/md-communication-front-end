@@ -17,7 +17,6 @@ export class CommunicationController{
             $scope.dateFormat1 = "dd " + month + " yyyy";
             $scope.dateFormat2 = $scope.dateFormat1 + " в " + "HH:mm:ss";
             $scope.date = Date.now();
-
         /* ------------------------------------------------------------------------------------------
         * создаем массив otdel и sotrudniki для Получатели
         */
@@ -38,7 +37,6 @@ export class CommunicationController{
         * get user
         * гетим инфомацию о нашем юзере  
         */  
-            
             var USER = $cookieStore.get("user");
             $scope.userName = USER.name;
             $scope.userId = USER._id;

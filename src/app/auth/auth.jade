@@ -23,10 +23,8 @@ div(style='height: 100vh;display: table;width: 100vw;')
               ng-model="vm.password")
             div.m-input-container(flex-gt-sm)
               select.select-user(ng-model="vm.option")
-                option(value='1') Клиент
-                option(value='2') Сотрудник
-
-            <tt>model = {{data}}</tt><br/>
+                option(value='1') Сотрудник
+                option(value='2') Клиент
             md-button.md-raised(ng-click='vm.auth()', style='background-color: #f47373;color: white;') Войти
 
     m-footer

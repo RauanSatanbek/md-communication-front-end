@@ -33,7 +33,8 @@ export class AuthController {
     //   console.log(response);
     // });
 
-    $localStorage.user = [];
+    // $localStorage.user = [];
+    // self.option = 1;
     self.auth = ()=>{
     console.log(self.idToEnter,self.password, self.option);
       // login

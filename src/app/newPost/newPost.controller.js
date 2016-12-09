@@ -115,7 +115,6 @@ export class NewPostController{
 						console.log(result);
 					});
 			}
-
 			// добавть выбранных юзеров, клинтов в массив
 			function addUsersToSelected(result) {
 				var bool = false;
