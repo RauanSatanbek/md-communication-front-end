@@ -7,7 +7,7 @@
       img.active(ng-src='../assets/images/help_desk/ticket-reverse.svg')
       md-tooltip(md-direction="bottom") Список постов
 
-  a(ui-sref='newPost')
+  a(ui-sref='newPost', ng-show="who == 1")
     .m-menu-documents-item(
     ng-click='vm.document.docType = item.value; vm.getNumberDocument()',
     ng-class='{"m-menu-document-item-active": false}'

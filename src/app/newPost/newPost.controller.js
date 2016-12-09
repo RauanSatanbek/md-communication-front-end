@@ -1,6 +1,7 @@
 export class NewPostController{
 	constructor($scope, $http, $cookieStore, envService){
 		'ngInject';
+        $scope.who = parseInt($cookieStore.get("who"));
 		/* ------------------------------------------------------------------------------------------
 		* Создаем массив месяцы
 		* берем активный месяц и дату
@@ -61,27 +62,28 @@ export class NewPostController{
 			$scope.addPost = function() {
 				var userIds = [];
 				$scope.postText = $(".ta-bind").html();
-				
-				if(!$scope.postText || $scope.postText == "<p><br></p>" || !$scope.postTema || !$scope.whoSee) {
+				if($scope.who != 1) {
+					$scope.postError = "Вам не доступно это операция";
+				} else if (!$scope.postText || $scope.postText == "<p><br></p>" || !$scope.postTema || !$scope.whoSee) {
 					$scope.postError = "Заполните поле корректно";
-				} else if($scope.selectedUers.length == 0){
+				} else if ($scope.selectedUers.length == 0){
 					$scope.postError = "Выберите получателей";
 				} else {
 					$scope.postError = "";
 					for(var i = 0; i < $scope.selectedUers.length; i++) {
 						userIds.push($scope.selectedUers[i]._id);
 					}
-					$http.post(url + "api/post", {theme: $scope.postTema, text: $scope.postText, userId: $scope.userId, filter: $scope.filterVar, userName: $scope.userName, userIds: userIds})
-						.success(function(result) {
-							$scope.postTema = "";
-							$scope.postText = "";
-							$scope.selectedUers = [];
-							$(".ta-bind").html("");
-							console.log(result);
-						})
-						.error(function(result) {
-							console.log("Error");
-						});
+					 $http.post(url + "api/post", {theme: $scope.postTema, text: $scope.postText, userId: $scope.userId, filter: $scope.filterVar, userName: $scope.userName, userIds: userIds})
+					 	.success(function(result) {
+					 		$scope.postTema = "";
+					 		$scope.postText = "";
+					 		$scope.selectedUers = [];
+					 		$(".ta-bind").html("");
+					 		console.log(result);
+					 	})
+				 		.error(function(result) {
+					 		console.log("Error");
+					 	});
 				}
 			}
 		/* ------------------------------------------------------------------------------------------

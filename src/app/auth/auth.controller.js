@@ -47,7 +47,7 @@ export class AuthController {
         }
       }).then(function successCallback(response) {
         console.log(response);
-
+        $cookieStore.put("who", self.option);
         $localStorage.user = response.data;
         $cookieStore.put("user", response.data);
         console.log($localStorage.user);

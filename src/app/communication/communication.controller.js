@@ -1,6 +1,8 @@
 export class CommunicationController{
     constructor ($http, $scope, $cookieStore, envService, $localStorage){
         'ngInject';
+
+        $scope.who = parseInt($cookieStore.get("who"));
         /* ------------------------------------------------------------------------------------------
         * Создаем массив месяцы
         * берем активный месяц и дату

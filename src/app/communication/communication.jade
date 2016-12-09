@@ -7,7 +7,7 @@
       img.active(ng-src='../assets/images/help_desk/ticket-reverse.svg')
       md-tooltip(md-direction="bottom") Список постов
 
-  a(ui-sref='newPost')
+  a(ui-sref='newPost', ng-show="who == 1")
     .m-menu-documents-item(
     ng-click='vm.document.docType = item.value; vm.getNumberDocument()',
     ng-class='{"m-menu-document-item-active": false}'
@@ -15,8 +15,6 @@
       img.disabled(ng-src='../assets/images/help_desk/ticket.svg')
       img.active(ng-src='../assets/images/help_desk/ticket-reverse.svg')
       md-tooltip(md-direction="bottom") Новое сообщение
-
-  
   .m-menu-documents-item(
   ng-click='vm.document.docType = item.value; vm.getNumberDocument()',
   ng-class='{"m-menu-document-item-active": false}'
@@ -84,7 +82,7 @@ m-row.m-document.m-flex
     .m-row 
       h1.text-header Список постов
       .btn-group.btn-filter
-        p.btn-select(ng-click="filter(1)", style='background: #f57373;color:#fff;') Мои
+        p.btn-select(ng-click="filter(1)", style='background: #f57373;color:#fff;', ng-show="who == 1") Мои
         p.btn-select(ng-click="filter(2)") Общие
         p.btn-select(ng-click="filter(3)") Все
         p.btn-select(ng-click="filter(4)") Избранные
@@ -153,4 +151,6 @@ m-row.m-document.m-flex
                 td
                   i(class="{{ {favorite: post.favorite, userId: userId} | CheckFavorite}}", aria-hidden='true', ng-click="adToFavorite(post._id)")
       // end Все посты
+     
+
      
