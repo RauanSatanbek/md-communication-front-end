@@ -7,7 +7,6 @@ export  class CheckAuthService{
     this.checkAccess = function(event, toState, toParams, fromState, fromParams) {
       //var $scope = $injector.get('$rootScope'),
       //  $sessionStorage = $injector.get('$sessionStorage');
-
       console.log($localStorage);
 
 

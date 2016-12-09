@@ -151,6 +151,6 @@ m-row.m-document.m-flex
                 td {{post.answer | date:dateFormat1}}
                 td {{post.creator[0].name}}
                 td
-                  i(class="{{post.favorite | CheckFavorite}}", aria-hidden='true', ng-click="adToFavorite(post._id)")
+                  i(class="{{ {favorite: post.favorite, userId: userId} | CheckFavorite}}", aria-hidden='true', ng-click="adToFavorite(post._id)")
       // end Все посты
      

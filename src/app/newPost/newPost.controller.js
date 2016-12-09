@@ -32,21 +32,22 @@ export class NewPostController{
 			$scope.postTema = ""; 
 			$scope.postText = "";
 			$scope.postId = "";
-			$scope.whoSee = "sda";
+			$scope.whoSee = "sad";
 		/* ------------------------------------------------------------------------------------------
 		* get user
 		* гетим инфомацию о нашем юзере  
 		*/  
-			$scope.userName = $cookieStore.get("userName");
-			$scope.userId = $cookieStore.get("userId");;
-			$scope.userAvatar = $cookieStore.get("userAvatar");
+			var USER = $cookieStore.get("user");
+			$scope.userName = USER.name;
+			$scope.userId = USER._id;
+			$scope.userAvatar = "";
 
 		/* ------------------------------------------------------------------------------------------
 		* get all users
 		* гетим всех юзеров для - Получатели  
 		*/
 			$scope.allUsers = {};
-			$http.get(url + "api/user/select" + $scope.userId)
+			$http.get(url + "api/user/select/" + $scope.userId)
 				.success(function(result) {
 					$scope.allUsers = result;
 				})
@@ -91,7 +92,7 @@ export class NewPostController{
 			$scope.addUserToSelected = function(userId) {
 				$http.get(url + "api/user/" + userId)
 					.success(function(result) {
-						console.log(result);
+						console.log(result, "------------------------------------------");
 						var bool = false;
 						for(var i = 0; i < $scope.selectedUers.length; i++){
 							if(result._id == $scope.selectedUers[i]._id) {

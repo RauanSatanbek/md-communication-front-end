@@ -1,9 +1,8 @@
 export class AuthController {
-  constructor ($http, $state, $q, toastr, $localStorage, envService) {
+  constructor ($http, $state, $q, toastr, $localStorage, envService, $cookieStore) {
     'ngInject';
 
     var self = this;
-
     self.backGroundStyle = ()=>{
       return {
         'background-selling':$state.includes('selling'),
@@ -34,20 +33,24 @@ export class AuthController {
     //   console.log(response);
     // });
 
+    $localStorage.user = [];
     self.auth = ()=>{
-    console.log(self.idToEnter,self.password);
+    console.log(self.idToEnter,self.password, self.option);
       // login
       $http({
         url : envService.read('apiUrl')+"api/login",
         method : "POST",
         data : {
           idToEnter : self.idToEnter,
-          password : self.password
+          password : self.password,
+          option: self.option 
         }
       }).then(function successCallback(response) {
         console.log(response);
 
         $localStorage.user = response.data;
+        $cookieStore.put("user", response.data);
+        console.log($localStorage.user);
         $state.go('communication');
       }, function errorCallback(response) {
         console.log(response);

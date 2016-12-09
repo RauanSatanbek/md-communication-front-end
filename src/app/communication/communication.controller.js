@@ -5,7 +5,7 @@ export class CommunicationController{
         * Создаем массив месяцы
         * берем активный месяц и дату
         */
-            console.log($localStorage.user);
+            console.log($cookieStore.get("user"), "------------------------------------------------");
             var months = ['январья', 'февралья', 'марта', 'апрелья', 'майа', 'июнья', 'июлья', 'августа', 'сентябрья', 'октябрья', 'ноябрья', 'декабрья'];
             var date = new Date();
             var month = months[date.getMonth()];
@@ -38,9 +38,12 @@ export class CommunicationController{
         * get user
         * гетим инфомацию о нашем юзере  
         */  
-            $scope.userName = "";
-            $scope.userId = "5838074c51053c185c396176";
+            
+            var USER = $cookieStore.get("user");
+            $scope.userName = USER.name;
+            $scope.userId = USER._id;
             $scope.userAvatar = "";
+            
             $scope.userInfoForComment = [];
             $scope.getUser = function(userId, type) {
                 $http.get(url + "api/user/" + userId)
@@ -60,7 +63,7 @@ export class CommunicationController{
                     console.log("error getUserName");
                 });
             }
-            $scope.getUser($scope.userId, 1);
+            // $scope.getUser($scope.userId, 1);
         /* ------------------------------------------------------------------------------------------
         * get Posts - Фильтрация
         * вызываем фунцию getPosts

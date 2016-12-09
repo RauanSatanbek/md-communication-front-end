@@ -25,13 +25,14 @@ export class PostInfoController{
                 $scope.postTema = ""; 
                 $scope.postText = "";
                 $scope.postId = $cookieStore.get("postId");
-                /* ------------------------------------------------------------------------------------------
-                  * get user
-                  * гетим инфомацию о нашем юзере  
-                  */  
-                      $scope.userName = $cookieStore.get("userName");
-                      $scope.userId = $cookieStore.get("userId");;
-                      $scope.userAvatar = $cookieStore.get("userAvatar");
+            /* ------------------------------------------------------------------------------------------
+            * get user
+            * гетим инфомацию о нашем юзере  
+            */  
+                var USER = $cookieStore.get("user");
+                $scope.userName = USER.name;
+                $scope.userId = USER._id;
+                $scope.userAvatar = "";
             // set text and tema of post
                 $scope.getPostTheme = "";
                 $scope.getPostText = "";
@@ -46,6 +47,7 @@ export class PostInfoController{
                 $scope.commentText = "";
                 $scope.commentError = "";
                 $scope.addComment = function() {
+                    console.log(456);
                     var commentText = $(".addComment text-angular .ta-text .ta-bind").html();
                     if(!commentText || commentText == "введите ваше комментарий" || commentText == "<p><br></p>"){
                         $scope.commentError = "Заполните поле корректно";
